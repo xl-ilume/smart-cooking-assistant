@@ -6,7 +6,7 @@ app = FastAPI()
 # 허용할 출처 설정
 origins = [
     "http://localhost:5173",
-    "https://5173-xlilume-smartcookingass-pd8oli6s2h1.ws-us117.gitpod.io",
+    "https://5173-xlilume-smartcookingass-y7vt12wxtpz.ws-us117.gitpod.io",
 ]
 
 # CORS 미들웨어 추가

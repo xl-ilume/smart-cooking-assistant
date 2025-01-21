@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 const App = () => {
   useEffect(() => {
     // API 호출
-    fetch('https://4000-xlilume-smartcookingass-pd8oli6s2h1.ws-us117.gitpod.io/api/hello', { credentials: "include" })
+    fetch('https://4000-xlilume-smartcookingass-y7vt12wxtpz.ws-us117.gitpod.io/api/hello', { credentials: "include" })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

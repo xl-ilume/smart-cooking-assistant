@@ -110,3 +110,5 @@
 
 ### 레시피 공유
 - 소셜 미디어(Facebook, Instagram)로 레시피 공유 가능
+
+### React Native 또는 Flutter를 사용하여 기존 웹 앱을 모바일 앱으로 제작
