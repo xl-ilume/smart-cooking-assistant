@@ -1,12 +1,9 @@
 tasks:
-  - name: Init Backend
+  - name: Run Backend
     command: |
       python3 -m venv venv
       source venv/bin/activate
       pip install -r api/requirements.txt
-  - name: Run Backend
-    command: |
-      source venv/bin/activate
       uvicorn api.main:app --host 0.0.0.0 --port 4000 --reload
   - name: Run Frontend
     command: |
