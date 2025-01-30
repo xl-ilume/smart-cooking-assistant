@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../styles";
 import ReactQueryProvider from "../providers/ReactQueryProvider";
 import { Header } from "@/widgets/header";
+import { Footer } from "@/widgets/footer";
 
 export const metadata: Metadata = {
   title: "냉장고마스터",
@@ -15,6 +16,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
         <ReactQueryProvider>
           <Header />
           <main>{children}</main>
+          <Footer />
         </ReactQueryProvider>
       </body>
     </html>
