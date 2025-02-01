@@ -1,40 +1,60 @@
 "use client";
 
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Bell, Search } from "lucide-react";
+import { useState } from "react";
+import NotificationsPanel from "./NotificationsPanel";
 
-const Header = () => {
+export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="w-full bg-blue-600 text-white p-4">
-      <div className="container max-w-[1024px] mx-auto flex items-center justify-between">
-        {/* 로고 */}
-        <Link href="/" className="text-xl font-bold">
-          냉장고마스터
-        </Link>
+    <>
+      <header className="w-full bg-white shadow-md">
+        <div className="max-w-[1024px] mx-auto px-4 py-3 flex items-center gap-4">
+          {/* 로고 */}
+          <Link href="/" className="text-xl font-bold whitespace-nowrap">
+            냉장고마스터
+          </Link>
 
-        {/* 검색창 (PC & 모바일 공통) */}
-        <div className="relative flex-1 mx-4 max-w-[400px]">
-          <input
-            type="text"
-            placeholder="검색어 입력"
-            className="w-full p-2 pl-10 pr-4 rounded-md text-black"
-          />
-          <Search
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-            size={20}
-          />
+          {/* 검색창 */}
+          <div className="flex-1">
+            <div className="relative w-full">
+              <input
+                type="text"
+                placeholder="레시피를 검색하세요..."
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              <Search
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                size={20}
+              />
+            </div>
+          </div>
+
+          {/* 알람 & 로그인 버튼 */}
+          <div className="flex items-center gap-4">
+            {/* 알람 아이콘 */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="p-2 rounded-full hover:bg-gray-100 transition"
+            >
+              <Bell size={24} />
+            </button>
+
+            {/* 로그인 버튼 */}
+            <Link
+              href="/login"
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md whitespace-nowrap"
+            >
+              로그인
+            </Link>
+          </div>
         </div>
+      </header>
 
-        {/* 로그인 버튼 (PC에서만 보이도록) */}
-        <Link
-          href="/auth"
-          className="hidden md:flex items-center justify-center gap-2 border border-white/50 px-4 py-2 rounded-md hover:bg-white hover:text-blue-600 transition-colors duration-300"
-        >
-          <span className="text-sm font-medium">로그인</span>
-        </Link>
-      </div>
-    </header>
+      {/* 알람 패널 */}
+      {isOpen && <NotificationsPanel onClose={() => setIsOpen(false)} />}
+    </>
   );
-};
-
-export default Header;
+}
