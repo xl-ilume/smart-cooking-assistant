@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import HomeBanner from "./HomeBanner";
+import HomeBanner from "@/features/home/ui/HomeBanner";
 import RecipeList from "@/features/recipe/ui/RecipeList";
 
 const dummyRecipes = [
