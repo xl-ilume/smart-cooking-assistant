@@ -15,7 +15,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
       <body>
         <ReactQueryProvider>
           <Header />
-          <main>{children}</main>
+          <main className="pb-[60px]">{children}</main>
           <Footer />
         </ReactQueryProvider>
       </body>

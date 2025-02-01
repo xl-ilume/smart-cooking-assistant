@@ -7,9 +7,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const slides = [
-  { id: 1, image: "/images/banner1.jpg", alt: "배너 1" },
-  { id: 2, image: "/images/banner2.jpg", alt: "배너 2" },
-  { id: 3, image: "/images/banner3.jpg", alt: "배너 3" },
+  { id: 1, image: "/images/banner1.webp", alt: "배너 1" },
+  { id: 2, image: "/images/banner2.webp", alt: "배너 2" },
+  { id: 3, image: "/images/banner3.webp", alt: "배너 3" },
 ];
 
 export default function HomeBanner() {
@@ -23,14 +23,14 @@ export default function HomeBanner() {
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000 }}
         loop
-        className="rounded-lg shadow-lg"
+        className="shadow-lg"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
             <img
               src={slide.image}
               alt={slide.alt}
-              className="w-full h-[250px] object-cover rounded-lg"
+              className="w-full h-[400px] md:h-[250px] object-cover"
             />
           </SwiperSlide>
         ))}
