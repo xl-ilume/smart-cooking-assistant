@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/features/auth";
 import BackButton from "@/shared/ui/BackButton";
@@ -11,13 +11,29 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const { user } = useAuthStore();
+  const { user, isLoading } = useAuthStore();
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      router.push("/"); // ✅ 로그인된 상태라면 홈페이지로 리디렉트
+    if (!isLoading) {
+      if (user) {
+        router.replace("/"); // ✅ 로그인된 상태라면 즉시 메인 페이지로 이동
+      } else {
+        setShouldRender(true); // ✅ 로그인 상태 확인 후 렌더링 허용
+      }
     }
-  }, [user, router]);
+  }, [user, isLoading, router]);
+
+  // ✅ Firebase 초기화가 끝날 때까지 아무것도 렌더링하지 않음
+  if (!shouldRender)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-8 h-8 border-4 border-gray-300 border-t-gray-500 rounded-full animate-spin"></div>
+          <p className="text-gray-500 text-sm">로딩 중...</p>
+        </div>
+      </div>
+    );
 
   return (
     <>

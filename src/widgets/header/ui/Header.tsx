@@ -36,7 +36,7 @@ export default function Header() {
 
           {/* 알람 & 로그인 버튼 */}
           <div className="flex items-center gap-4">
-            {user ? (
+            {user && (
               // 로그인 상태: 알람 아이콘 표시
               <button
                 onClick={() => setIsOpen(true)}
@@ -44,14 +44,6 @@ export default function Header() {
               >
                 <Bell size={24} />
               </button>
-            ) : (
-              // 비로그인 상태: 로그인 버튼 표시
-              <Link
-                href="/auth/login"
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md whitespace-nowrap"
-              >
-                로그인
-              </Link>
             )}
           </div>
         </div>

@@ -5,11 +5,13 @@ import { onAuthStateChanged, User } from "firebase/auth";
 interface AuthState {
   user: User | null;
   setUser: (user: User | null) => void;
+  isLoading: Boolean;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
-  setUser: (user) => set({ user }),
+  isLoading: true,
+  setUser: (user) => set({ user, isLoading: false }),
 }));
 
 // Firebase 인증 상태 변경 감지
