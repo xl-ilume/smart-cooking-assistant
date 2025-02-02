@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import HomeBanner from "@/features/home/ui/HomeBanner";
-import RecipeList from "@/features/recipe/ui/RecipeList";
+import { HomeBanner } from "@/features/home";
+import { RecipeList } from "@/features/recipe";
 
 const dummyRecipes = [
   { id: 1, name: "김치찌개", image: "/images/kimchi-stew.jpg" },

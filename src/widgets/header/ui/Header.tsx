@@ -1,24 +1,26 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Bell, Search } from "lucide-react";
-import { useState } from "react";
 import NotificationsPanel from "./NotificationsPanel";
+import { useAuthStore } from "@/features/auth";
 
 export default function Header() {
+  const { user } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <header className="w-full bg-white shadow-md">
-        <div className="max-w-[1024px] mx-auto px-4 py-3 flex items-center gap-4">
+      <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+        <div className="max-w-[1024px] mx-auto px-4 py-3 flex items-center justify-between gap-4">
           {/* 로고 */}
           <Link href="/" className="text-xl font-bold whitespace-nowrap">
             냉장고마스터
           </Link>
 
           {/* 검색창 */}
-          <div className="flex-1">
+          <div className="relative flex-1 mx-4 max-w-[400px]">
             <div className="relative w-full">
               <input
                 type="text"
@@ -34,21 +36,23 @@ export default function Header() {
 
           {/* 알람 & 로그인 버튼 */}
           <div className="flex items-center gap-4">
-            {/* 알람 아이콘 */}
-            <button
-              onClick={() => setIsOpen(true)}
-              className="p-2 rounded-full hover:bg-gray-100 transition"
-            >
-              <Bell size={24} />
-            </button>
-
-            {/* 로그인 버튼 */}
-            <Link
-              href="/login"
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md whitespace-nowrap"
-            >
-              로그인
-            </Link>
+            {user ? (
+              // 로그인 상태: 알람 아이콘 표시
+              <button
+                onClick={() => setIsOpen(true)}
+                className="p-2 rounded-full hover:bg-gray-100 transition"
+              >
+                <Bell size={24} />
+              </button>
+            ) : (
+              // 비로그인 상태: 로그인 버튼 표시
+              <Link
+                href="/auth/login"
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md whitespace-nowrap"
+              >
+                로그인
+              </Link>
+            )}
           </div>
         </div>
       </header>

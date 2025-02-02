@@ -1,7 +1,6 @@
 "use client";
 
-import UserDashboard from "@/features/recipe/ui/UserDashboard";
-import RecipeList from "@/features/recipe/ui/RecipeList";
+import { UserDashboard, RecipeList } from "@/features/recipe";
 
 const dummyRecipes = [
   { id: 1, name: "김치찌개", image: "/images/kimchi-stew.jpg" },

@@ -23,7 +23,7 @@ export default function UserProfileCard() {
             <StatItem title="팔로우" value="567" />
           </div>
           <Link
-            href="/recipe/add"
+            href="/recipes/add"
             className="flex items-center gap-2 mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md"
           >
             <Pencil size={20} />
