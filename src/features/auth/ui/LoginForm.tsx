@@ -20,18 +20,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white px-6">
-      {/* 로고 */}
-      <div className="mb-6">
-        <img
-          src="/logo.png"
-          alt="Logo"
-          width={80}
-          height={80}
-          className="rounded-lg"
-        />
-      </div>
-
+    <>
       {/* 로그인 폼 */}
       <div className="w-full max-w-sm">
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
@@ -52,7 +41,7 @@ export default function LoginForm() {
         />
         <button
           onClick={handleLogin}
-          className="w-full py-2 rounded-lg bg-gray-500 text-white"
+          className="w-full my-2 py-2 rounded-lg bg-blue-500 text-white"
         >
           로그인
         </button>
@@ -94,6 +83,6 @@ export default function LoginForm() {
           카카오 로그인
         </button>
       </div>
-    </div>
+    </>
   );
 }

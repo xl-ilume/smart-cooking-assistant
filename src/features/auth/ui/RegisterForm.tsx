@@ -8,41 +8,68 @@ export default function RegisterForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
 
   const handleRegister = async () => {
+    if (password !== passwordConfirm) {
+      setError("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
     try {
       await register(email, password);
       router.push("/auth/login");
-    } catch (err) {
-      setError("회원가입에 실패했습니다. 이메일을 확인해주세요.");
+    } catch (err: any) {
+      console.error(err);
+      if (err.code === "auth/email-already-in-use") {
+        setError("이미 사용 중인 이메일입니다.");
+      } else if (err.code === "auth/invalid-email") {
+        setError("올바른 이메일 주소를 입력해주세요.");
+      } else if (err.code === "auth/weak-password") {
+        setError("비밀번호는 최소 6자리 이상이어야 합니다.");
+      } else if (err.code === "auth/missing-password") {
+        setError("비밀번호를 입력해주세요.");
+      } else {
+        setError("회원가입에 실패했습니다. 입력 정보를 확인해주세요.");
+      }
     }
   };
 
   return (
-    <div className="max-w-sm mx-auto p-6 bg-white rounded-lg shadow">
-      <h1 className="text-2xl font-bold mb-4">회원가입</h1>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      <input
-        type="email"
-        placeholder="이메일"
-        className="w-full px-4 py-2 border rounded-lg my-2"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="비밀번호"
-        className="w-full px-4 py-2 border rounded-lg my-2"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button
-        onClick={handleRegister}
-        className="w-full bg-green-500 text-white py-2 rounded-lg"
-      >
-        회원가입
-      </button>
-    </div>
+    <>
+      <div className="w-full max-w-sm">
+        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
+        <input
+          type="email"
+          placeholder="이메일"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg my-2 bg-white"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="비밀번호 (6자리 이상)"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg my-2 bg-white"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="비밀번호 확인"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg my-2 bg-white"
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+        />
+
+        <button
+          onClick={handleRegister}
+          className="w-full my-2 py-2 rounded-lg bg-blue-500 text-white"
+        >
+          회원가입
+        </button>
+      </div>
+    </>
   );
 }
